@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/techListFragment"
-        android:name="com.emine.techopedia.TechListFragment"
+        android:name="com.emine.techopedia.view.TechListFragment"
         android:label="fragment_tech_list"
         tools:layout="@layout/fragment_tech_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/techDetailFragment"
-        android:name="com.emine.techopedia.TechDetailFragment"
+        android:name="com.emine.techopedia.view.TechDetailFragment"
         android:label="fragment_tech_detail"
         tools:layout="@layout/fragment_tech_detail" >
         <argument

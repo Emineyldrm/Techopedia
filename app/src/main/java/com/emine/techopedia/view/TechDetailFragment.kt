@@ -1,4 +1,4 @@
-package com.emine.techopedia
+package com.emine.techopedia.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
