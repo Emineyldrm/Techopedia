@@ -39,18 +39,7 @@ class TechListFragment : Fragment() {
         binding.swipeRefreshLayout.setOnRefreshListener {
 
         }
-        val retrofit= Retrofit.Builder()
-            .baseUrl("https://raw.githubusercontent.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(TechAPI::class.java)
 
-       CoroutineScope(Dispatchers.IO).launch {
-            val teknolojiler=retrofit.getTech()
-            teknolojiler.forEach {
-                println(it.techIsim)
-            }
-        }
 
     }
 
