@@ -14,7 +14,7 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/techListRecycler"
+            android:id="@+id/techListRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="1dp"

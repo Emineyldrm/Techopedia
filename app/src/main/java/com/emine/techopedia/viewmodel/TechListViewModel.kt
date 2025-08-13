@@ -14,6 +14,7 @@ import com.emine.techopedia.util.OzelSharedPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.compareTo
 
 
 class TechListViewModel(application: Application): AndroidViewModel(application) {
@@ -24,6 +25,33 @@ class TechListViewModel(application: Application): AndroidViewModel(application)
     private val techAPIService= TechAPIServis()
 
     private val ozelSharedPreferences= OzelSharedPreferences(getApplication())
+    private val guncellemeZamani=5 * 60 *100 *100* 100L
+
+    fun refreshData(){
+        val kaydedilmeZamani= ozelSharedPreferences.zamaniAl()
+        if (kaydedilmeZamani!=null && kaydedilmeZamani!=0L && System.nanoTime()-kaydedilmeZamani < guncellemeZamani){
+            //güncelleme zamanını geçmediyse roomdan verileri alacağız.
+            //roomdan verileri alacak
+            verileriRoomdanAl()
+        }else{
+            verileriInternettenAl()
+        }
+    }
+
+    fun refreshDataFromInternet(){
+        verileriInternettenAl()
+    }
+    private fun verileriRoomdanAl(){
+        techYukleniyor.value=true
+        viewModelScope.launch{
+            val techList= TechDatabase(getApplication()).techDAO().getAllTech()
+            withContext(Dispatchers.Main){
+                teknolojileriGoster(techList)
+                Toast.makeText(getApplication(),"Roomdan aldık teknolojileri", Toast.LENGTH_LONG).show()
+
+            }
+        }
+    }
 
     private fun teknolojileriGoster(techList: List<Tech>){
         teknolojiler.value=techList
@@ -31,7 +59,7 @@ class TechListViewModel(application: Application): AndroidViewModel(application)
         techYukleniyor.value=false
     }
 
-    private fun verilerInternettenAl(){
+    private fun verileriInternettenAl(){
         techYukleniyor.value=true
         viewModelScope.launch { Dispatchers.IO
         val techList=techAPIService.getData()
