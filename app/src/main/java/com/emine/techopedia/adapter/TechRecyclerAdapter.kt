@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.emine.techopedia.databinding.TechRecyclerRowBinding
 import com.emine.techopedia.model.Tech
+import com.emine.techopedia.util.gorselIndir
+import com.emine.techopedia.util.placeholderYap
 import com.emine.techopedia.view.TechListFragmentDirections
 
 class TechRecyclerAdapter(val techList: ArrayList<Tech>) : RecyclerView.Adapter<TechRecyclerAdapter.TechViewHolder>(){
@@ -35,6 +37,7 @@ class TechRecyclerAdapter(val techList: ArrayList<Tech>) : RecyclerView.Adapter<
             val action= TechListFragmentDirections.actionTechListFragmentToTechDetailFragment(techList[position].uuid)
             Navigation.findNavController(it).navigate(action)
         }
+        holder.binding.imageView.gorselIndir(techList[position].techGorsel, placeholderYap(holder.itemView.context))
     }
 
     override fun getItemCount(): Int {

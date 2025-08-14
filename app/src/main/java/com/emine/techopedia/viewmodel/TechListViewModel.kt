@@ -25,7 +25,7 @@ class TechListViewModel(application: Application): AndroidViewModel(application)
     private val techAPIService= TechAPIServis()
 
     private val ozelSharedPreferences= OzelSharedPreferences(getApplication())
-    private val guncellemeZamani=5 * 60 *100 *100* 100L
+    private val guncellemeZamani=5 * 60 *1000 *1000* 1000L
 
     fun refreshData(){
         val kaydedilmeZamani= ozelSharedPreferences.zamaniAl()
